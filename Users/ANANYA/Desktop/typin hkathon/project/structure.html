@@ -3,12 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typing Speed Master</title>
+    <title>Typing Speed Test</title>
+
+    <!--Connected multiple fonts [Sora, Poppins, Quicksand]-->
     <link rel="stylesheet" href="design.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    
 </head>
 
 <body>
-    
+    <div class="main_container">
+
+        <div class="navbar-container">
+            <div class="typinglogo-con">
+                <img src="./images/logo-large.svg" alt="logo">
+            </div>
+
+            <div class="bestWPM-con">
+                <img id="champion" src="./images/icon-personal-best.svg" alt="Champion">
+                <p id="personal-best-text">Personal Best: </p>
+                <p id="personal-best-no">0</p>
+                <p id="personal-best-wpm">WPM</p>
+            </div>
+        </div>
+
+
+        <div class="navbar-controls">
+            <div class="show-details">
+                <div class="wpm details">
+                    <p class="details-text">WPM: </p>
+                    <p id="current-wpm">0</p>
+                </div>
+
+                <div class="accuracy details">
+                    <p class="details-text">Accuracy: </p>
+                    <p id="current-accuracy">0</p>
+                    <p id="current-accuracy-percent">%</p>
+                </div>
+
+                <div class="timer details">
+                    <p class="details-text">Time: </p>
+                    <p id="current-timer">0</p>
+                </div>
+            </div>
+
+            <div class="show-controls">
+                <div class="difficulty control">
+                    <p>Difficulty: </p>
+                    <input type="radio" id="difficulty-easy" name="difficulty-option">
+                    <label for="difficulty-easy">Easy</label>
+                    <input type="radio" id="difficulty-medium" name="difficulty-option">
+                    <label for="difficulty-medium">Medium</label>
+                    <input type="radio" id="difficulty-hard" name="difficulty-option">
+                    <label for="difficulty-hard">Hard</label>
+                </div>
+
+                <div class="mode control">
+                    <p>Mode: </p>
+                    <input type="radio" id="mode-timed" name="mode-option">
+                    <label for="mode-timed">Timed</label>
+                    <input type="radio" id="mode-passage" name="mode-option">
+                    <label for="mode-passage">Passage</label>
+                </div>
+
+                <div class="timed control">
+                    <label for="time-options">Timer: </label>
+                    <select name="time-options" id="time-options">
+                        <option value="120sec">120 seconds</option>
+                        <option value="60sec" selected>60 seconds</option>
+                        <option value="30sec">30 seconds</option>
+                    </select>
+                </div>
+
+                <div class="type control">
+                    <label for="type-options">Text Type: </label>
+                    <select name="type-options" id="type-options">
+                        <option value="normal" selected>Normal</option>
+                        <option value="code">Coding</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
 </body>
 
 

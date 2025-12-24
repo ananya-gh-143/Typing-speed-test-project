@@ -1,0 +1,167 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+body{
+    background-color: hsl(0, 0%, 7%);
+    font-family: 'Sora', 'Poppins', 'Quicksand';
+    padding: 2rem 5rem 2rem 5rem;
+    color: white;
+}
+
+
+
+/* Navigation top-most bar */
+
+.navbar-container{
+    display: flex;
+    justify-content: space-between;
+   
+    padding-bottom: 1rem;
+}
+
+.bestWPM-con{
+    display: flex;
+    align-items: center;
+}
+
+#champion{
+    height: 1.2rem;
+    margin: 0.3rem;
+}
+
+#personal-best-text{
+    margin: 0.3rem;
+    font-size: 0.95rem;
+    color: hsl(240, 1%, 59%);
+}
+
+#personal-best-no{
+    margin: 0.3rem;
+    font-size: 1rem;
+    color: white;
+}
+
+#personal-best-wpm{
+    margin-right: 0.3rem;
+    font-size: 1rem;
+    color: white;
+}
+
+
+
+/* Navigation second bar - Details and Controls bar */
+
+
+.navbar-controls{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 2rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 0.2px solid hsl(0, 0%, 22%);
+    align-items: center;
+   
+}
+
+
+
+    /*Details part*/
+.show-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.details{
+    display: flex;
+    margin-left: 1rem;
+    padding-right: 1rem;
+}
+
+.wpm, .accuracy{
+    border-right: 0.2px solid hsl(0, 0%, 22%);
+}
+
+.details-text{
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+    color: hsl(240, 1%, 59%);
+}
+
+#current-wpm{
+    font-size: 1.3rem;
+    color: white;
+}
+
+#current-accuracy, #current-accuracy-percent{  
+    font-size: 1.3rem;
+    color: hsl(354, 63%, 57%);
+}
+
+#current-timer{
+    font-size: 1.3rem;
+    color: hsl(49, 85%, 70%);
+}
+
+
+    /*Controls part*/
+.show-controls{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.difficulty input[type="radio"], .mode input[type="radio"]{
+    display: none;
+}
+
+.difficulty label, .mode label{
+    font-family: 'Sora','Poppins','Quicksand';
+    font-size: 0.85rem;
+    color: white;
+    border-radius: 0.4rem;
+    padding: 0.3rem;
+    margin-left: 0.3rem;
+    border: 1.5px solid hsl(240, 1%, 59%);
+}
+
+.difficulty input[type="radio"]:checked+label, .mode input[type="radio"]:checked+label{
+    border: 1.5px solid hsl(210, 100%, 65%);
+    color: hsl(210, 100%, 65%);
+}
+
+.control{
+    display: flex;
+    margin-left: 1rem;
+    padding-right: 1rem;
+}
+
+.difficulty, .mode, .timed{
+    border-right: 0.2px solid hsl(0, 0%, 22%);
+}
+
+.difficulty p, .mode p{
+    font-size: 0.8rem;
+    color: hsl(240, 1%, 59%);
+    margin: 0.3rem;
+}
+
+.timed label, .type label{
+    font-size: 0.8rem;
+    color: hsl(240, 1%, 59%);
+    margin: 0.3rem;
+}
+
+.timed select, .type select{
+    font-family: 'Sora','Poppins','Quicksand';
+    font-size: 0.85rem;
+    background: none;
+    color: hsl(210, 100%, 65%);
+    border-radius: 0.4rem;
+    padding: 0.3rem;
+    margin-left: 0.3rem;
+    border: 1.5px solid hsl(210, 100%, 65%);
+}
