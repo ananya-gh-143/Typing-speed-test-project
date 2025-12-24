@@ -126,6 +126,7 @@ body{
     padding: 0.3rem;
     margin-left: 0.3rem;
     border: 1.5px solid hsl(240, 1%, 59%);
+    cursor: pointer;
 }
 
 .difficulty input[type="radio"]:checked+label, .mode input[type="radio"]:checked+label{
@@ -164,4 +165,5 @@ body{
     padding: 0.3rem;
     margin-left: 0.3rem;
     border: 1.5px solid hsl(210, 100%, 65%);
+    cursor: pointer;
 }
