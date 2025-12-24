@@ -1,0 +1,60 @@
+{
+  "easy": [
+    {
+      "id": "easy-1",
+      "text": "<!DOCTYPE html><html><head><title>My Page</title></head><body><h1>Hello World</h1></body></html>"
+    },
+    {
+      "id": "easy-2",
+      "text": "body { background-color: lightblue; } h1 { color: navy; }"
+    },
+    {
+      "id": "easy-3",
+      "text": "console.log('Hello World');"
+    },
+    {
+      "id": "easy-4",
+      "text": "let x = 5; let y = 10; console.log(x + y);"
+    },
+    {
+      "id": "easy-5",
+      "text": "<p>This is a paragraph.</p> <a href='#'>Click here</a>"
+    }
+  ],
+  "medium": [
+    {
+      "id": "medium-1",
+      "text": "function greet(name) { return 'Hello ' + name; } console.log(greet('Alice'));"
+    },
+    {
+      "id": "medium-2",
+      "text": "const arr = [1,2,3,4,5]; arr.forEach(num => console.log(num));"
+    },
+    {
+      "id": "medium-3",
+      "text": ".container { display: flex; justify-content: center; align-items: center; }"
+    },
+    {
+      "id": "medium-4",
+      "text": "<form> <label for='name'>Name:</label> <input type='text' id='name'> <button type='submit'>Submit</button> </form>"
+    },
+    {
+      "id": "medium-5",
+      "text": "for (let i = 0; i < 10; i++) { if (i % 2 === 0) { console.log(i + ' is even'); } }"
+    }
+  ],
+  "hard": [
+    {
+      "id": "hard-1",
+      "text": "async function fetchData(url) { try { const res = await fetch(url); const data = await res.json(); return data; } catch(e) { console.error(e); } }"
+    },
+    {
+      "id": "hard-2",
+      "text": "class Stack { constructor() { this.items = []; } push(item) { this.items.push(item); } pop() { return this.items.pop(); } peek() { return this.items[this.items.length - 1]; } }"
+    },
+    {
+      "id": "hard-3",
+      "text": "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Complex Page</title><style> .container { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; } header { background-color: navy; color: white; } </style></head><body><div class='container'><header><h1>My Website</h1></header><main><section id='about'>About me</section><section id='projects'>Projects</section></main></div><script> console.log('Page Loaded'); </script></body></html>"
+    }
+  ]
+}
