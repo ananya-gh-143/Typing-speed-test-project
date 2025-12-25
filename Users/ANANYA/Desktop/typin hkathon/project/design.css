@@ -167,3 +167,52 @@ body{
     border: 1.5px solid hsl(210, 100%, 65%);
     cursor: pointer;
 }
+
+
+
+
+/*Main typing container*/
+
+    /*Typing box area*/
+
+.correct{
+    color: hsl(140, 63%, 57%);
+}
+.incorrect{
+    color: hsl(354, 63%, 57%);
+    text-decoration: underline 0.1rem;
+    text-underline-offset: 0.4rem;
+}
+.current{
+    background-color: hsl(240, 1%, 32%);
+}
+
+
+.main-typing-box{
+position: relative;
+
+min-height: 23rem;
+}
+
+.textDisplay{
+    font-size: 2em;
+    color: hsl(240, 1%, 59%);
+}
+
+.textDisplay span{
+border-radius: 0.2rem;
+}
+
+#typingInput{
+position: absolute;
+top: 0;
+min-height: 100%;
+width: 100%;
+opacity: 0;
+font-size: 2rem;
+font-family: 'Sora','Poppins','Quicksand';
+}
+
+
+    /*Reset button*/
+
