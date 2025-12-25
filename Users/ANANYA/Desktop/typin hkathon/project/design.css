@@ -61,6 +61,7 @@ body{
     padding-top: 2rem;
     padding-bottom: 0.6rem;
     border-bottom: 0.2px solid hsl(0, 0%, 22%);
+    margin-bottom: 1.5rem;
     align-items: center;
    
 }
@@ -190,7 +191,7 @@ body{
 
 .main-typing-box{
 position: relative;
-
+border-bottom: 0.2px solid hsl(0, 0%, 22%);;
 min-height: 23rem;
 }
 
@@ -216,3 +217,25 @@ font-family: 'Sora','Poppins','Quicksand';
 
     /*Reset button*/
 
+.reset-btn-cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.3rem;
+}
+
+.resetButton{
+    height: 2.5rem;
+    width: 8.7rem;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Sora', 'Poppins','Quicksand';
+    color: white;
+    background-color: hsl(0, 0%, 17%);
+    border-radius: 0.4rem;
+    border: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
