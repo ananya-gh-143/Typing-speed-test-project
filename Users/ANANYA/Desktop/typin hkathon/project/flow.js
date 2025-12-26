@@ -2,6 +2,8 @@
 let textDisplay = document.querySelector(".textDisplay");
 let timeDisplayer = document.querySelector("#current-timer");
 let timeSelectOptions = document.querySelector("#time-options");
+let starterBtn = document.querySelector("#start-typing-test");
+let starterPage = document.querySelector(".start-main-cont");
 
 let IntervalID = null;
 
@@ -36,11 +38,42 @@ async function loadJSON (){
     try{
         const response = await fetch("data.json");
         typingData = await response.json();
+        defaultLoadPassage();
     }
     catch(error){console.log(`Error occured: ${error}`);}
 } 
 
 loadJSON(); //calling the function
+
+//Just as the site is loaded, generate a medium sized passage.
+function defaultLoadPassage(){
+    loadText("medium");
+    starterBtn.focus();
+}
+
+
+
+starterBtn.addEventListener("click",()=>{
+    loadText("medium");
+    let mediumradio = document.querySelector("#difficulty-medium")
+    mediumradio.checked = true;
+    starterPage.classList.add("disappearance");
+    typingInput.focus();
+})
+
+starterPage.addEventListener("click",()=>{
+    loadText("medium");
+    let mediumradio = document.querySelector("#difficulty-medium")
+    mediumradio.checked = true;
+    starterPage.classList.add("disappearance");
+    typingInput.focus();
+})
+
+
+
+
+
+
 
 //for each input whose name belongs to 'difficulty-option', add a event listener that- when a 'change' happens, call function 'handleDifficultyChange'
 document.querySelectorAll("input[name='difficulty-option']").forEach(radioOption => {
@@ -50,6 +83,7 @@ document.querySelectorAll("input[name='difficulty-option']").forEach(radioOption
 
 //takes the 'event' from event listener, then checks if the input clicked's id belogs to either of the following and if so then sends it as a input, respectively, in the 'loadText' function. 
 function handleDifficultyChange(event){
+    StoreSec = Seconds;
     timeDisplayer.innerText = StoreSec;
     if(event.target.id === "difficulty-easy"){
         loadText("easy");
@@ -153,6 +187,7 @@ function backTimer (){
             clearInterval(IntervalID);
             TIME = false;
             typingInput.disabled = true;
+            
         }
     },1000);
 }

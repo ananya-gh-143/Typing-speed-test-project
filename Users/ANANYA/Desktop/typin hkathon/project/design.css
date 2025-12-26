@@ -252,9 +252,13 @@ font-family: 'Sora','Poppins','Quicksand';
 
 /* Start page */
 
+.disappearance{
+    display: none;
+}
+
 .start-main-cont{
     position: absolute;
-    background-color: hsl(0, 0%, 7%,0.80);
+    background-color: hsl(0, 0%, 7%,0.60);
     backdrop-filter: blur(5px);
     height: 100%;
     width: 100%;
@@ -277,8 +281,9 @@ font-family: 'Sora','Poppins','Quicksand';
     text-align: center;
 }
 
+    /*Starter button */
 #start-typing-test{
-    margin: 0.5rem;
+    margin: 1rem;
     color: white;
     background-color: hsl(214, 100%, 55%);
     border: none;
@@ -294,3 +299,9 @@ font-family: 'Sora','Poppins','Quicksand';
     background-color: hsl(210, 100%, 65%);
     cursor: pointer;
 }
+
+#start-typing-test:focus{
+    outline: 0.1rem solid hsl(210, 100%, 65%);
+    outline-offset: 0.15rem;
+}
+
