@@ -129,6 +129,10 @@ body{
     border: 1.5px solid hsl(240, 1%, 59%);
     cursor: pointer;
 }
+.difficulty label:hover, .mode label:hover{
+    border: 1.5px solid hsl(210, 100%, 65%);
+    color: hsl(210, 100%, 65%);
+}
 
 .difficulty input[type="radio"]:checked+label, .mode input[type="radio"]:checked+label{
     border: 1.5px solid hsl(210, 100%, 65%);
@@ -174,6 +178,9 @@ body{
 
 /*Main typing container*/
 
+.typing-starter-container{
+    position: relative;
+}
     /*Typing box area*/
 
 .correct{
@@ -239,4 +246,51 @@ font-family: 'Sora','Poppins','Quicksand';
     align-items: center;
     cursor: pointer;
     
+}
+
+
+
+/* Start page */
+
+.start-main-cont{
+    position: absolute;
+    background-color: hsl(0, 0%, 7%,0.80);
+    backdrop-filter: blur(5px);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+
+.starter-page-cont{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    width: 100%;
+    opacity: 30;
+}
+
+.start-page{
+    text-align: center;
+}
+
+#start-typing-test{
+    margin: 0.5rem;
+    color: white;
+    background-color: hsl(214, 100%, 55%);
+    border: none;
+    border-radius: 0.6rem;
+    min-height: 2.7rem;
+    min-width: 9.3rem;
+    font-family: 'Sora','Poppins','Quicksand';
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+#start-typing-test:hover{
+    background-color: hsl(210, 100%, 65%);
+    cursor: pointer;
 }
