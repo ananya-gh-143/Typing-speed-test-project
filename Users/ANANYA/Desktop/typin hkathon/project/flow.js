@@ -154,7 +154,7 @@ typingInput.addEventListener("input",()=>{
         }else{
             span.classList.remove("current");
             span.classList.add("incorrect");
-            span.classList.remove(".correct");
+            span.classList.remove("correct");
         };
     });
 
