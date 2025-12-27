@@ -11,22 +11,31 @@ let IntervalID = null;
 //Storing seconds in the Timer's seconds value for backTimer.
 let Seconds = 60;
 let StoreSec = Seconds;
-timeDisplayer.innerText = StoreSec;
+timeDisplayer.innerText = MinSec(StoreSec);
 timeSelectOptions.addEventListener("change",()=>{
     if(timeSelectOptions.value == "60sec"){
         Seconds = 60;
-        StoreSec= Seconds;
-        timeDisplayer.innerText = StoreSec;
+        typingInput.focus();
+        // StoreSec= Seconds;
+        // timeDisplayer.innerText = MinSec(StoreSec);
     } else if(timeSelectOptions.value == "120sec"){
         Seconds = 120;
-        StoreSec= Seconds;
-        timeDisplayer.innerText = StoreSec;
+        typingInput.focus();
+        // StoreSec= Seconds;
+        // timeDisplayer.innerText = MinSec(StoreSec);
     } else if(timeSelectOptions.value == "30sec"){
         Seconds = 30;
-        StoreSec= Seconds;
-        timeDisplayer.innerText = StoreSec;
+        typingInput.focus();
+        // StoreSec= Seconds;
+        // timeDisplayer.innerText = MinSec(StoreSec);
     }
     
+    if (!TIME){ //if timer is not already on then 
+        StoreSec= Seconds;
+        timeDisplayer.innerText = MinSec(StoreSec);
+        typingInput.focus(); //even after changing the time we don't have to click the input box it type. i.e. it automatically gets in focus.
+    }
+
 })
 
 
@@ -83,8 +92,9 @@ document.querySelectorAll("input[name='difficulty-option']").forEach(radioOption
 
 //takes the 'event' from event listener, then checks if the input clicked's id belogs to either of the following and if so then sends it as a input, respectively, in the 'loadText' function. 
 function handleDifficultyChange(event){
+    stopTimer();
     StoreSec = Seconds;
-    timeDisplayer.innerText = StoreSec;
+    timeDisplayer.innerText = MinSec(StoreSec);
     if(event.target.id === "difficulty-easy"){
         loadText("easy");
     } else if(event.target.id=== "difficulty-medium"){
@@ -125,7 +135,7 @@ typingInput.focus();
 //add a eventlistener that whenever any charcter is written or deleted- gets triggered.
 //whatever is typed in input, split it into characters and add it into input variable.
 typingInput.addEventListener("input",()=>{
-    backTimer();
+    backTimer(); //turn on the timer just as user enters a single character in the input box
     const input= typingInput.value.split("");   
     const spans = document.querySelectorAll(".textDisplay span"); //select all spans from the previous made spans, add them all in variable 'spans'
 
@@ -164,8 +174,13 @@ typingInput.addEventListener("input",()=>{
 });
 
 
-
-
+//converts seconds into minutes and seconds;
+function MinSec (seconds){
+    let min = Math.floor(seconds/60).toString();
+    let sec = (seconds % 60).toString()
+    sec = sec.padStart(2,"0");
+    return `${min}:${sec}`;
+}
 
 //Backwords counting Timer:
 let TIME = false;
@@ -176,18 +191,16 @@ function backTimer (){
     //After the timer runs again from start-- TIME is made true and StoreSec is reseted so that it doesn't go below 0;
     TIME = true;
     StoreSec = Seconds;
-    timeDisplayer.innerText = StoreSec;
+    timeDisplayer.innerText = MinSec(StoreSec);
 
     IntervalID = setInterval(()=>{
         StoreSec--;
-        timeDisplayer.innerText = StoreSec;
+        timeDisplayer.innerText = MinSec(StoreSec);
     
-
         if(StoreSec <= 0){
             clearInterval(IntervalID);
             TIME = false;
             typingInput.disabled = true;
-            
         }
     },1000);
 }

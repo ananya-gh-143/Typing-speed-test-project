@@ -104,6 +104,7 @@ body{
 #current-timer{
     font-size: 1.3rem;
     color: hsl(49, 85%, 70%);
+    font-weight: 600;
 }
 
 
