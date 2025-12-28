@@ -16,18 +16,12 @@ timeSelectOptions.addEventListener("change",()=>{
     if(timeSelectOptions.value == "60sec"){
         Seconds = 60;
         typingInput.focus();
-        // StoreSec= Seconds;
-        // timeDisplayer.innerText = MinSec(StoreSec);
     } else if(timeSelectOptions.value == "120sec"){
         Seconds = 120;
         typingInput.focus();
-        // StoreSec= Seconds;
-        // timeDisplayer.innerText = MinSec(StoreSec);
     } else if(timeSelectOptions.value == "30sec"){
         Seconds = 30;
         typingInput.focus();
-        // StoreSec= Seconds;
-        // timeDisplayer.innerText = MinSec(StoreSec);
     }
     
     if (!TIME){ //if timer is not already on then 
@@ -85,14 +79,16 @@ starterPage.addEventListener("click",()=>{
 
 
 //for each input whose name belongs to 'difficulty-option', add a event listener that- when a 'change' happens, call function 'handleDifficultyChange'
-document.querySelectorAll("input[name='difficulty-option']").forEach(radioOption => {
+const radioButtons = document.querySelectorAll("input[name='difficulty-option']");
+radioButtons.forEach(radioOption => {
     radioOption.addEventListener("change", handleDifficultyChange);
 });
 
 
 //takes the 'event' from event listener, then checks if the input clicked's id belogs to either of the following and if so then sends it as a input, respectively, in the 'loadText' function. 
 function handleDifficultyChange(event){
-    stopTimer();
+    if(TIME)return;     //if timer is on [TIME is true] then the following wouln't be executed
+   
     StoreSec = Seconds;
     timeDisplayer.innerText = MinSec(StoreSec);
     if(event.target.id === "difficulty-easy"){
@@ -102,7 +98,15 @@ function handleDifficultyChange(event){
     } else if(event.target.id=== "difficulty-hard"){
         loadText("hard");
     }
+  
 }
+
+function updateRadioOptions (){     //if Timer is on [TIME is true] the difficulty option radio buttons would be disabled [disability = true] or vice versa
+    radioButtons.forEach(radio =>{
+        radio.disabled = TIME;
+    });
+}
+
 
 function loadText(level){
     const passages = typingData[level]; //load the difficulty level passed into 'loadText' from the fetched json which is stored in 'typingData'
@@ -192,6 +196,7 @@ function backTimer (){
     TIME = true;
     StoreSec = Seconds;
     timeDisplayer.innerText = MinSec(StoreSec);
+    updateRadioOptions();
 
     IntervalID = setInterval(()=>{
         StoreSec--;
@@ -200,6 +205,7 @@ function backTimer (){
         if(StoreSec <= 0){
             clearInterval(IntervalID);
             TIME = false;
+            updateRadioOptions();
             typingInput.disabled = true;
         }
     },1000);
@@ -211,5 +217,6 @@ function stopTimer(){
         clearInterval(IntervalID);
         StoreSec = Seconds;
         TIME = false;
+        updateRadioOptions();
     }
 }
