@@ -5,6 +5,8 @@ let timeSelectOptions = document.querySelector("#time-options");
 let starterBtn = document.querySelector("#start-typing-test");
 let starterPage = document.querySelector(".start-main-cont");
 
+const typingInput = document.querySelector("#typingInput");
+
 let IntervalID = null;
 
 
@@ -25,7 +27,7 @@ timeSelectOptions.addEventListener("change",()=>{
     }
     
     if (!TIME){ //if timer is not already on then 
-        StoreSec= Seconds;
+        StoreSec= Seconds;      //update the choice user made above--
         timeDisplayer.innerText = MinSec(StoreSec);
         typingInput.focus(); //even after changing the time we don't have to click the input box it type. i.e. it automatically gets in focus.
     }
@@ -56,13 +58,6 @@ function defaultLoadPassage(){
 
 
 
-starterBtn.addEventListener("click",()=>{
-    loadText("medium");
-    let mediumradio = document.querySelector("#difficulty-medium")
-    mediumradio.checked = true;
-    starterPage.classList.add("disappearance");
-    typingInput.focus();
-})
 
 starterPage.addEventListener("click",()=>{
     loadText("medium");
@@ -75,14 +70,13 @@ starterPage.addEventListener("click",()=>{
 
 
 
-
-
-
 //for each input whose name belongs to 'difficulty-option', add a event listener that- when a 'change' happens, call function 'handleDifficultyChange'
 const radioButtons = document.querySelectorAll("input[name='difficulty-option']");
 radioButtons.forEach(radioOption => {
     radioOption.addEventListener("change", handleDifficultyChange);
 });
+
+
 
 
 //takes the 'event' from event listener, then checks if the input clicked's id belogs to either of the following and if so then sends it as a input, respectively, in the 'loadText' function. 
@@ -124,18 +118,24 @@ function loadText(level){
         textDisplay.appendChild(span);
     });
 
-    //the input box where user types; enable it, clear it's previously entered any value, and turn on it's focus.
-    let typingInput= document.querySelector("#typingInput");
+    //the input box where user types; enable it, clear its previously entered value, and focus it.
     typingInput.disabled = false;
-    typingInput.value ="";
+    typingInput.value = "";
     typingInput.focus();
     
 }
 
 
+// Always move cursor to end if user clicks input
+typingInput.addEventListener("click", () => {
+    const length = typingInput.value.length;
+    typingInput.focus();
+    typingInput.setSelectionRange(length, length);
+});
 
-const typingInput = document.querySelector("#typingInput");
-typingInput.focus();
+typingInput && typingInput.focus();
+
+
 //add a eventlistener that whenever any charcter is written or deleted- gets triggered.
 //whatever is typed in input, split it into characters and add it into input variable.
 typingInput.addEventListener("input",()=>{
