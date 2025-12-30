@@ -4,15 +4,27 @@ let timeDisplayer = document.querySelector("#current-timer");
 let timeSelectOptions = document.querySelector("#time-options");
 let starterBtn = document.querySelector("#start-typing-test");
 let starterPage = document.querySelector(".start-main-cont");
-
+let typeSelectOptions = document.querySelector("#type-options");
 const typingInput = document.querySelector("#typingInput");
 
+
+
+
+
+let TimerType = backTimer;  //by default the timer mode would be Timed.
+let IntervalID2 = null;
 let IntervalID = null;
+
+
+//Storing seconds in the Timer's seconds value for upTimer.
+let upSeconds = 0;
+let upStoreSec = upSeconds;
 
 
 //Storing seconds in the Timer's seconds value for backTimer.
 let Seconds = 60;
 let StoreSec = Seconds;
+
 timeDisplayer.innerText = MinSec(StoreSec);
 timeSelectOptions.addEventListener("change",()=>{
     if(timeSelectOptions.value == "60sec"){
@@ -26,11 +38,19 @@ timeSelectOptions.addEventListener("change",()=>{
         typingInput.focus();
     }
     
-    if (!TIME){ //if timer is not already on then 
-        StoreSec= Seconds;      //update the choice user made above--
-        timeDisplayer.innerText = MinSec(StoreSec);
-        typingInput.focus(); //even after changing the time we don't have to click the input box it type. i.e. it automatically gets in focus.
+    if(TimerType == backTimer){
+        if (!TIME){ //if timer is not already on then 
+            StoreSec= Seconds;      //update the choice user made above--
+            timeDisplayer.innerText = MinSec(StoreSec);
+            typingInput.focus(); //even after changing the time we don't have to click the input box it type. i.e. it automatically gets in focus.
+        }
+    }else if(TimerType == upTimer){
+        if (!TIME){
+            timeDisplayer.innerText = MinSec(upStoreSec);
+            typingInput.focus();
+        }
     }
+    
 
 })
 
@@ -38,17 +58,26 @@ timeSelectOptions.addEventListener("change",()=>{
 
 
 let typingData = {};
+
+
 //loading the data.json file using async await
 async function loadJSON (){
     try{
         const response = await fetch("data.json");
+        typingData = {};
         typingData = await response.json();
-        defaultLoadPassage();
+        
     }
-    catch(error){console.log(`Error occured: ${error}`);}
+    catch(error){console.log(`Error occured in loading normal JSON: ${error}`);}
 } 
 
-loadJSON(); //calling the function
+
+async function initialLoad(){   //  runs a 1st load async function that runs 'defaultLoadPassage' AFTER 'loadJSON'
+    await loadJSON(); //calling the function
+    defaultLoadPassage();
+}
+initialLoad();
+
 
 //Just as the site is loaded, generate a medium sized passage.
 function defaultLoadPassage(){
@@ -58,11 +87,57 @@ function defaultLoadPassage(){
 
 
 
+//load the coding [data2.json] file using async await
+async function loadJSON2 (){ //..................................................................................
+    try{
+        const response = await fetch("data2.json");
+        typingData = {};
+        typingData = await response.json();
+    }
+    catch(error){console.log(`Error occured in loading coding JSON: ${error}`);}
+} 
+
+
+async function loadJsonFile1(){
+    await loadJSON();
+    loadText("medium");
+    document.querySelector("#difficulty-medium").checked = true;
+}
+
+async function loadJsonFile2(){
+    await loadJSON2();
+    loadText("medium");
+    document.querySelector("#difficulty-medium").checked = true;
+}
+
+typeSelectOptions.addEventListener("change",()=>{   //..............................................................................
+    if (TIME)return;
+
+    if(typeSelectOptions.value == "normal"){
+        loadJsonFile1();
+        typingInput.focus();
+        
+        
+    } else if(typeSelectOptions.value == "code"){
+        loadJsonFile2()
+        typingInput.focus();
+        
+        
+    }
+    
+
+})
+
+
+
 
 starterPage.addEventListener("click",()=>{
     loadText("medium");
-    let mediumradio = document.querySelector("#difficulty-medium")
+    let mediumradio = document.querySelector("#difficulty-medium");
     mediumradio.checked = true;
+    let timedradio = document.querySelector("#mode-timed");
+    timedradio.checked = true;
+
     starterPage.classList.add("disappearance");
     typingInput.focus();
 })
@@ -77,14 +152,46 @@ radioButtons.forEach(radioOption => {
 });
 
 
+const modeButtons = document.querySelectorAll("input[name='mode-option']"); 
+modeButtons.forEach(modeOption => {
+    modeOption.addEventListener("change", handleModeChange);
+});
+
+function handleModeChange(event){
+    if (TIME)return;
+
+    if(event.target.id === "mode-timed"){
+        TimerType = backTimer;
+        typingInput && typingInput.focus();
+        StoreSec = Seconds;
+        timeDisplayer.innerText = MinSec(StoreSec);
+        timeSelectOptions.disabled = false;
+    } else if(event.target.id === "mode-passage"){
+        TimerType = upTimer;
+        typingInput && typingInput.focus();
+        upStoreSec = upSeconds;
+        timeDisplayer.innerText = MinSec(upStoreSec); 
+        timeSelectOptions.disabled = true;
+    }
+
+}
+
+
 
 
 //takes the 'event' from event listener, then checks if the input clicked's id belogs to either of the following and if so then sends it as a input, respectively, in the 'loadText' function. 
 function handleDifficultyChange(event){
     if(TIME)return;     //if timer is on [TIME is true] then the following wouln't be executed
    
-    StoreSec = Seconds;
-    timeDisplayer.innerText = MinSec(StoreSec);
+    if(TimerType == backTimer){
+        StoreSec = Seconds;
+        timeDisplayer.innerText = MinSec(StoreSec);
+    }else if(TimerType == upTimer){
+        upStoreSec = upSeconds;
+        timeDisplayer.innerText = MinSec(upStoreSec);
+    }
+
+    
     if(event.target.id === "difficulty-easy"){
         loadText("easy");
     } else if(event.target.id=== "difficulty-medium"){
@@ -101,8 +208,24 @@ function updateRadioOptions (){     //if Timer is on [TIME is true] the difficul
     });
 }
 
+function updateModeOptions (){     //if Timer is on [TIME is true] the mode option radio buttons would be disabled [disability = true] or vice versa
+    modeButtons.forEach(mode =>{
+        mode.disabled = TIME;
+    }); 
+}
+
+function updateTextType(){
+    typeSelectOptions.disabled = TIME;
+}
+
+function updateTimeType(){
+    timeSelectOptions.disabled = TIME;
+}
+
 
 function loadText(level){
+    if (!typingData[level]){console.log(`Typing data not loaded yet; error.`); return;}     //if typingdata is not loaded yet from json then temprorily exit function
+
     const passages = typingData[level]; //load the difficulty level passed into 'loadText' from the fetched json which is stored in 'typingData'
     
     const randomIndx = Math.floor(Math.random()* passages.length);  //make a variable 'randomIndx' which generates random number from the length of passages available in the given 'level'
@@ -139,7 +262,7 @@ typingInput && typingInput.focus();
 //add a eventlistener that whenever any charcter is written or deleted- gets triggered.
 //whatever is typed in input, split it into characters and add it into input variable.
 typingInput.addEventListener("input",()=>{
-    backTimer(); //turn on the timer just as user enters a single character in the input box
+    TimerType(); //turn on the timer just as user enters a single character in the input box
     const input= typingInput.value.split("");   
     const spans = document.querySelectorAll(".textDisplay span"); //select all spans from the previous made spans, add them all in variable 'spans'
 
@@ -173,7 +296,12 @@ typingInput.addEventListener("input",()=>{
   }else if(nextIndex == spans.length){
     typingInput.disabled = true;
     console.log("passage over!")
+
+    if (TimerType == backTimer){
     stopTimer();
+    }else if(TimerType == upTimer){
+        stopTimer2();
+    }
   }
 });
 
@@ -186,9 +314,10 @@ function MinSec (seconds){
     return `${min}:${sec}`;
 }
 
-//Backwords counting Timer:
+
 let TIME = false;
 
+//Backwards counting Timer:
 function backTimer (){
     if (TIME){return;};
 
@@ -197,6 +326,9 @@ function backTimer (){
     StoreSec = Seconds;
     timeDisplayer.innerText = MinSec(StoreSec);
     updateRadioOptions();
+    updateModeOptions();
+    updateTextType();
+    updateTimeType();
 
     IntervalID = setInterval(()=>{
         StoreSec--;
@@ -206,17 +338,64 @@ function backTimer (){
             clearInterval(IntervalID);
             TIME = false;
             updateRadioOptions();
+            updateModeOptions();
+            updateTextType();
+            updateTimeType();
             typingInput.disabled = true;
         }
     },1000);
 }
 
-//to stop the timer if and when neccesary
+//to stop the backtimer if and when neccesary
 function stopTimer(){
     if(IntervalID != null){
         clearInterval(IntervalID);
         StoreSec = Seconds;
         TIME = false;
         updateRadioOptions();
+        updateModeOptions();
+        updateTextType();
+        updateTimeType();
     }
 }
+
+
+
+
+//Upwards counting Timer:
+function upTimer (){
+    if (TIME){return;};
+
+    //After the timer runs again from start-- TIME is made true and StoreSec is reseted so that it doesn't go below 0;
+    TIME = true;
+    upStoreSec = upSeconds;
+    timeDisplayer.innerText = MinSec(upStoreSec);
+    updateRadioOptions();
+    updateModeOptions();
+    updateTextType();
+    updateTimeType();
+
+    IntervalID2 = setInterval(()=>{
+        upStoreSec++;
+        timeDisplayer.innerText = MinSec(upStoreSec);
+        
+    },1000);
+}
+
+//to stop the uptimer if and when neccesary
+function stopTimer2(){
+    if(IntervalID2 != null){
+        clearInterval(IntervalID2);
+        upStoreSec = upSeconds;
+        TIME = false;
+        updateRadioOptions();
+        updateModeOptions();
+        updateTextType();
+        updateTimeType();
+    }
+}
+
+
+
+
+

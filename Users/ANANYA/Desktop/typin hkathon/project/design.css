@@ -130,6 +130,10 @@ body{
     border: 1.5px solid hsl(240, 1%, 59%);
     cursor: pointer;
 }
+.difficulty label:focus, .mode label:focus{
+    outline: 0.1rem solid hsl(210, 100%, 65%);
+    outline-offset: 0.15rem;
+}
 .difficulty label:hover, .mode label:hover{
     border: 1.5px solid hsl(210, 100%, 65%);
     color: hsl(210, 100%, 65%);
@@ -173,7 +177,10 @@ body{
     border: 1.5px solid hsl(210, 100%, 65%);
     cursor: pointer;
 }
-
+.timed select:focus, .type select:focus{
+    outline: 0.1rem solid hsl(210, 100%, 65%);
+    outline-offset: 0.15rem;
+}
 
 
 

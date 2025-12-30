@@ -6,55 +6,67 @@
     },
     {
       "id": "easy-2",
-      "text": "body { background-color: lightblue; } h1 { color: navy; }"
+      "text": "body { background-color: lightblue; } h1 { color: navy; } p { border-radius: 1rem; }"
     },
     {
       "id": "easy-3",
-      "text": "console.log('Hello World');"
+      "text": "console.log('Hello World'); console.log(2 + 1 + 3); console.log('This is console.log statement');"
     },
     {
       "id": "easy-4",
-      "text": "let x = 5; let y = 10; console.log(x + y);"
+      "text": "let x = 5; let y = 10; console.log(x + y); let z = x + y; console.log(`5 plus 10 = ${z}`);"
     },
     {
       "id": "easy-5",
-      "text": "<p>This is a paragraph.</p> <a href='#'>Click here</a>"
+      "text": "<p>This is a paragraph.</p> <a href='#'>Click here</a> <p>Above is a link...</p>"
     }
   ],
   "medium": [
     {
       "id": "medium-1",
-      "text": "function greet(name) { return 'Hello ' + name; } console.log(greet('Alice'));"
+      "text": "function greet(name) { return 'Hello ' + name; } console.log(greet('Alice')); const arr = [1,2,3,4,5]; arr.forEach(num => console.log(num));"
     },
     {
       "id": "medium-2",
-      "text": "const arr = [1,2,3,4,5]; arr.forEach(num => console.log(num));"
+      "text": "<div class='code-block'><h3>Stack Example</h3><pre><code>class Stack { constructor() { this.items = []; } push(item) { this.items.push(item); } pop() { return this.items.pop(); } }</code></pre></div>"
+
     },
     {
       "id": "medium-3",
-      "text": ".container { display: flex; justify-content: center; align-items: center; }"
+      "text": "body { margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #f5f5f5; color: #333; } .container { width: 80%; margin: auto; .padding: 20px; } h1 { text-align: center; color: #444; }"
+
     },
     {
       "id": "medium-4",
-      "text": "<form> <label for='name'>Name:</label> <input type='text' id='name'> <button type='submit'>Submit</button> </form>"
+      "text": "input[type='text'], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 16px; } input[type='text']:focus, textarea:focus { border-color: #007BFF; outline: none; }"
+
     },
     {
       "id": "medium-5",
-      "text": "for (let i = 0; i < 10; i++) { if (i % 2 === 0) { console.log(i + ' is even'); } }"
+      "text": "class BankAccount { constructor(balance = 0) { this.balance = balance; } deposit(amount) { this.balance += amount; } withdraw(amount) { if (amount > this.balance) return false; this.balance -= amount; return true; } getBalance() { return this.balance; } }"
+
     }
   ],
   "hard": [
     {
       "id": "hard-1",
-      "text": "async function fetchData(url) { try { const res = await fetch(url); const data = await res.json(); return data; } catch(e) { console.error(e); } }"
+      "text": "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Dashboard</title><style> .dashboard { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; } header { background-color: navy; color: #fff; padding: 10px; } section { padding: 5px; border: 1px solid #aaa; } </style></head><body><div class='dashboard'><header><h1>Admin Dashboard</h1></header></div><script> console.log('Dashboard Loaded'); </script></body></html>"
     },
     {
       "id": "hard-2",
-      "text": "class Stack { constructor() { this.items = []; } push(item) { this.items.push(item); } pop() { return this.items.pop(); } peek() { return this.items[this.items.length - 1]; } }"
+      "text": "class Stack { constructor() { this.items = []; } push(item) { this.items.push(item); } pop() { return this.items.pop(); } peek() { return this.items[this.items.length - 1]; } } async function fetchData(url) { try { const res = await fetch(url); const data = await res.json(); return data; } catch(e) { console.error(e); } }"
     },
     {
       "id": "hard-3",
       "text": "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Complex Page</title><style> .container { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; } header { background-color: navy; color: white; } </style></head><body><div class='container'><header><h1>My Website</h1></header><main><section id='about'>About me</section><section id='projects'>Projects</section></main></div><script> console.log('Page Loaded'); </script></body></html>"
+    },
+    {
+      "id": "hard-4",
+      "text": "body { font-family: 'Helvetica', sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; } .container { display: flex; flex-direction: row; gap: 15px; } header { background-color: darkslateblue; color: white; padding: 10px; text-align: center; } main { flex: 3; padding: 10px; } aside { flex: 1; background-color: #ddd; padding: 10px; } footer { background-color: darkslateblue; color: white; text-align: center; padding: 8px; }"
+    },
+    {
+      "id": "hard-5",
+      "text": "document.addEventListener('DOMContentLoaded', function() { const header = document.querySelector('header'); header.style.backgroundColor = 'darkred'; const sections = document.querySelectorAll('section'); sections.forEach(section => { section.addEventListener('click', () => { alert('You clicked ' + section.id); }); }); console.log('Page fully loaded and events attached'); });"
     }
   ]
 }
