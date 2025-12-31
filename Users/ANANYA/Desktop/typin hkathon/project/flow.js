@@ -5,11 +5,13 @@ let timeSelectOptions = document.querySelector("#time-options");
 let starterBtn = document.querySelector("#start-typing-test");
 let starterPage = document.querySelector(".start-main-cont");
 let typeSelectOptions = document.querySelector("#type-options");
+let wpmShowBox = document.querySelector("#current-wpm");
 const typingInput = document.querySelector("#typingInput");
 
 
 
 
+let inputLength = 0;
 
 let TimerType = backTimer;  //by default the timer mode would be Timed.
 let IntervalID2 = null;
@@ -88,7 +90,7 @@ function defaultLoadPassage(){
 
 
 //load the coding [data2.json] file using async await
-async function loadJSON2 (){ //..................................................................................
+async function loadJSON2 (){ 
     try{
         const response = await fetch("data2.json");
         typingData = {};
@@ -110,7 +112,7 @@ async function loadJsonFile2(){
     document.querySelector("#difficulty-medium").checked = true;
 }
 
-typeSelectOptions.addEventListener("change",()=>{   //..............................................................................
+typeSelectOptions.addEventListener("change",()=>{ 
     if (TIME)return;
 
     if(typeSelectOptions.value == "normal"){
@@ -225,6 +227,8 @@ function updateTimeType(){
 
 function loadText(level){
     if (!typingData[level]){console.log(`Typing data not loaded yet; error.`); return;}     //if typingdata is not loaded yet from json then temprorily exit function
+    inputLength = 0;
+    wpmShowBox.innerText = 0;
 
     const passages = typingData[level]; //load the difficulty level passed into 'loadText' from the fetched json which is stored in 'typingData'
     
@@ -263,6 +267,8 @@ typingInput && typingInput.focus();
 //whatever is typed in input, split it into characters and add it into input variable.
 typingInput.addEventListener("input",()=>{
     TimerType(); //turn on the timer just as user enters a single character in the input box
+    inputLength = typingInput.value.length;
+
     const input= typingInput.value.split("");   
     const spans = document.querySelectorAll(".textDisplay span"); //select all spans from the previous made spans, add them all in variable 'spans'
 
@@ -331,6 +337,7 @@ function backTimer (){
     updateTimeType();
 
     IntervalID = setInterval(()=>{
+        wpmCalculator();
         StoreSec--;
         timeDisplayer.innerText = MinSec(StoreSec);
     
@@ -376,6 +383,7 @@ function upTimer (){
     updateTimeType();
 
     IntervalID2 = setInterval(()=>{
+        wpmCalculator();
         upStoreSec++;
         timeDisplayer.innerText = MinSec(upStoreSec);
         
@@ -396,6 +404,25 @@ function stopTimer2(){
 }
 
 
+function wpmCalculator (){
+    if (!TIME)return;
 
+    if(TimerType == backTimer){
+        if (inputLength < 5){
+            console.log(0);
+            return;
+        }
+        let WPM = (inputLength / 5) / ((Seconds-StoreSec) / 60); 
+        wpmShowBox.innerText = Math.round(WPM);
+
+    }else if(TimerType == upTimer){
+        if (inputLength < 5 || upStoreSec < 1){
+            console.log(0);
+            return;
+        }
+        let WPM = (inputLength / 5) / (upStoreSec / 60);
+        wpmShowBox.innerText = Math.round(WPM);
+    }
+}
 
 
