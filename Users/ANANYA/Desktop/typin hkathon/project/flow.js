@@ -6,12 +6,15 @@ let starterBtn = document.querySelector("#start-typing-test");
 let starterPage = document.querySelector(".start-main-cont");
 let typeSelectOptions = document.querySelector("#type-options");
 let wpmShowBox = document.querySelector("#current-wpm");
+let accuracyShowBox = document.querySelector("#current-accuracy");
 const typingInput = document.querySelector("#typingInput");
 
 
 
 
 let inputLength = 0;
+let wrongInput = 0;
+let lastCheckedIndex = 0;
 
 let TimerType = backTimer;  //by default the timer mode would be Timed.
 let IntervalID2 = null;
@@ -227,7 +230,7 @@ function updateTimeType(){
 
 function loadText(level){
     if (!typingData[level]){console.log(`Typing data not loaded yet; error.`); return;}     //if typingdata is not loaded yet from json then temprorily exit function
-    inputLength = 0;
+    accuracyReset();
     wpmShowBox.innerText = 0;
 
     const passages = typingData[level]; //load the difficulty level passed into 'loadText' from the fetched json which is stored in 'typingData'
@@ -267,10 +270,24 @@ typingInput && typingInput.focus();
 //whatever is typed in input, split it into characters and add it into input variable.
 typingInput.addEventListener("input",()=>{
     TimerType(); //turn on the timer just as user enters a single character in the input box
-    inputLength = typingInput.value.length;
-
+    
     const input= typingInput.value.split("");   
     const spans = document.querySelectorAll(".textDisplay span"); //select all spans from the previous made spans, add them all in variable 'spans'
+
+    
+    //Wrong input checker for accuracy calculator
+    while (lastCheckedIndex < typingInput.value.length){
+        let typedChar = typingInput.value[lastCheckedIndex];
+        let expectedChar = spans[lastCheckedIndex].innerText;
+
+        inputLength++;
+        if(typedChar != expectedChar){
+            wrongInput++;
+        }
+            
+        lastCheckedIndex++;
+    }
+
 
     //for each span [character] and its index, put its index on the user's character's index and store it in 'char'
     spans.forEach((span, index)=>{ 
@@ -338,6 +355,7 @@ function backTimer (){
 
     IntervalID = setInterval(()=>{
         wpmCalculator();
+        accuracyCalculator();
         StoreSec--;
         timeDisplayer.innerText = MinSec(StoreSec);
     
@@ -384,6 +402,7 @@ function upTimer (){
 
     IntervalID2 = setInterval(()=>{
         wpmCalculator();
+        accuracyCalculator();
         upStoreSec++;
         timeDisplayer.innerText = MinSec(upStoreSec);
         
@@ -403,13 +422,12 @@ function stopTimer2(){
     }
 }
 
-
+// Calculates the wpm 
 function wpmCalculator (){
     if (!TIME)return;
 
     if(TimerType == backTimer){
         if (inputLength < 5){
-            console.log(0);
             return;
         }
         let WPM = (inputLength / 5) / ((Seconds-StoreSec) / 60); 
@@ -417,7 +435,6 @@ function wpmCalculator (){
 
     }else if(TimerType == upTimer){
         if (inputLength < 5 || upStoreSec < 1){
-            console.log(0);
             return;
         }
         let WPM = (inputLength / 5) / (upStoreSec / 60);
@@ -426,3 +443,18 @@ function wpmCalculator (){
 }
 
 
+//Calculates the accuracy
+function accuracyCalculator(){
+    if (!TIME)return;
+
+    let accuracyPercent = ((inputLength - wrongInput) / inputLength) * 100;
+    accuracyShowBox.innerText = Math.round(accuracyPercent);
+}
+
+function accuracyReset (){
+    if (TIME)return;
+    lastCheckedIndex = 0;
+    inputLength = 0;
+    wrongInput = 0;
+    accuracyShowBox.innerText = 0;
+}
