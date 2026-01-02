@@ -9,6 +9,9 @@ let wpmShowBox = document.querySelector("#current-wpm");
 let accuracyShowBox = document.querySelector("#current-accuracy");
 const typingInput = document.querySelector("#typingInput");
 
+let MainArea  = document.querySelector("#main-area-container");
+let FinalPage = document.querySelector(".successful-page");
+
 
 
 
@@ -319,6 +322,8 @@ typingInput.addEventListener("input",()=>{
   }else if(nextIndex == spans.length){
     typingInput.disabled = true;
     console.log("passage over!")
+    //........................................................................................................................................
+    FinalPageShow();
 
     if (TimerType == backTimer){
     stopTimer();
@@ -367,6 +372,9 @@ function backTimer (){
             updateTextType();
             updateTimeType();
             typingInput.disabled = true;
+            //......................................................................................................................................
+            FinalPageShow();
+
         }
     },1000);
 }
@@ -457,4 +465,16 @@ function accuracyReset (){
     inputLength = 0;
     wrongInput = 0;
     accuracyShowBox.innerText = 0;
+}
+
+
+
+function FinalPageShow (){
+    MainArea.classList.add("disappearance");
+    FinalPage.classList.remove("disappearance");
+}
+
+function FinalPageHide (){
+    MainArea.classList.remove("disappearance");
+    FinalPage.classList.add("disappearance");
 }
