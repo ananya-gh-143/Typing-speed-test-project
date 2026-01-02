@@ -31,90 +31,143 @@
             </div>
         </div>
 
+        <div id="main-area-container">
+            <div class="navbar-controls">
+                <div class="show-details">
+                    <div class="wpm details">
+                        <p class="details-text">WPM: </p>
+                        <p id="current-wpm">0</p>
+                    </div>
 
-        <div class="navbar-controls">
-            <div class="show-details">
-                <div class="wpm details">
-                    <p class="details-text">WPM: </p>
-                    <p id="current-wpm">0</p>
+                    <div class="accuracy details">
+                        <p class="details-text">Accuracy: </p>
+                        <p id="current-accuracy">0</p>
+                        <p id="current-accuracy-percent">%</p>
+                    </div>
+
+                    <div class="timer details">
+                        <p class="details-text">Time: </p>
+                        <p id="current-timer">0</p>
+                        
+                    </div>
                 </div>
 
-                <div class="accuracy details">
-                    <p class="details-text">Accuracy: </p>
-                    <p id="current-accuracy">0</p>
-                    <p id="current-accuracy-percent">%</p>
-                </div>
+                <div class="show-controls">
+                    <div class="difficulty control">
+                        <p>Difficulty: </p>
+                        <input type="radio" id="difficulty-easy" name="difficulty-option">
+                        <label for="difficulty-easy">Easy</label>
+                        <input type="radio" id="difficulty-medium" name="difficulty-option">
+                        <label for="difficulty-medium">Medium</label>
+                        <input type="radio" id="difficulty-hard" name="difficulty-option">
+                        <label for="difficulty-hard">Hard</label>
+                    </div>
 
-                <div class="timer details">
-                    <p class="details-text">Time: </p>
-                    <p id="current-timer">0</p>
-                    
+                    <div class="mode control">
+                        <p>Mode: </p>
+                        <input type="radio" id="mode-timed" name="mode-option">
+                        <label for="mode-timed">Timed</label>
+                        <input type="radio" id="mode-passage" name="mode-option">
+                        <label for="mode-passage">Passage</label>
+                    </div>
+
+                    <div class="timed control">
+                        <label for="time-options">Timer: </label>
+                        <select name="time-options" id="time-options">
+                            <option value="120sec">120 seconds</option>
+                            <option value="60sec" selected>60 seconds</option>
+                            <option value="30sec">30 seconds</option>
+                        </select>
+                    </div>
+
+                    <div class="type control">
+                        <label for="type-options">Text Type: </label>
+                        <select name="type-options" id="type-options">
+                            <option value="normal" selected>Normal</option>
+                            <option value="code">Coding</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <div class="show-controls">
-                <div class="difficulty control">
-                    <p>Difficulty: </p>
-                    <input type="radio" id="difficulty-easy" name="difficulty-option">
-                    <label for="difficulty-easy">Easy</label>
-                    <input type="radio" id="difficulty-medium" name="difficulty-option">
-                    <label for="difficulty-medium">Medium</label>
-                    <input type="radio" id="difficulty-hard" name="difficulty-option">
-                    <label for="difficulty-hard">Hard</label>
+            <div class="typing-starter-container">
+
+                <div class="text-area-cont">
+                    <div class="main-typing-box">
+                        <p class="textDisplay"></p>
+                        <input type="text" id="typingInput" placeholder="Start typing here...">
+                    </div>
+                    <div class="reset-btn-cont">
+                        <button class="resetButton">Restart Test
+                            <div class="redo-logo">
+                            <i class="fa-solid fa-rotate-right"></i>
+                            </div>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="mode control">
-                    <p>Mode: </p>
-                    <input type="radio" id="mode-timed" name="mode-option">
-                    <label for="mode-timed">Timed</label>
-                    <input type="radio" id="mode-passage" name="mode-option">
-                    <label for="mode-passage">Passage</label>
-                </div>
-
-                <div class="timed control">
-                    <label for="time-options">Timer: </label>
-                    <select name="time-options" id="time-options">
-                        <option value="120sec">120 seconds</option>
-                        <option value="60sec" selected>60 seconds</option>
-                        <option value="30sec">30 seconds</option>
-                    </select>
-                </div>
-
-                <div class="type control">
-                    <label for="type-options">Text Type: </label>
-                    <select name="type-options" id="type-options">
-                        <option value="normal" selected>Normal</option>
-                        <option value="code">Coding</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="typing-starter-container">
-
-            <div class="text-area-cont">
-                <div class="main-typing-box">
-                    <p class="textDisplay"></p>
-                    <input type="text" id="typingInput" placeholder="Start typing here...">
-                </div>
-                <div class="reset-btn-cont">
-                    <button class="resetButton">Restart Test
-                        <div class="redo-logo">
-                        <i class="fa-solid fa-rotate-right"></i>
+                <div class="start-main-cont">
+                    <div class="starter-page-cont">
+                        <div class="start-page">
+                            <button id="start-typing-test">Start typing test</button>
+                            <p id="start-btn-para">Or click the text and start typing</p>
                         </div>
-                    </button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="start-main-cont">
-            <div class="starter-page-cont">
-                <div class="start-page">
-                    <button id="start-typing-test">Start typing test</button>
-                    <p id="start-btn-para">Or click the text and start typing</p>
-                </div>
             </div>
         </div>
 
+
+        <div class="successful-page">
+
+            <div class="logo-cont-holder">
+                <div class="main-logo-cont">
+                    <div class="logo-cont">
+                        <img id="success-logo" src="images/icon-completed.svg" alt="checked-image">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="main-text-holder">
+                    <p id="main-header">Baseline Established</p>
+                    <p id="belowtext">You've set the bar. Now time to break it!</p>
+            </div>
+
+
+            <div class="detail-show-holder">
+                <div class="detail-show-cont">
+                    <div class="wpm-detail show">
+                        <p class="detail-show-text">WPM:</p>
+                        <p id="detail-show-wpm">89</p>
+                    </div>
+                    <div class="accuracy-detail show">
+                        <p class="detail-show-text">Accuracy:</p>
+                        <div class="detail-show-accuracy-cont">
+                            <p id="detail-show-accuracy">0</p>
+                            <p id="detail-show-accuracy-percent">%</p>
+                        </div>
+                    </div>
+                    <div class="character-detail show">
+                        <p class="detail-show-text">Characters:</p>
+                        <div class="detail-show-char-cont">
+                            <p class="detail-show-char" id="detail-show-char-total">100</p>
+                            <p class="detail-show-char" id="detail-show-char-percent">/</p>
+                            <p class="detail-show-char" id="detail-show-char-wrong">5</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="final-btn-cont">
+                <button id="final-btn"> Go again!
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
+            </div>
+
+        </div>
+        
      
 
 
