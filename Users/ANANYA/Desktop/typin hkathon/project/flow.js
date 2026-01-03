@@ -34,8 +34,6 @@ let personal_best_number = parseInt(localStorage.getItem("personal_best_WPM")) |
 personalBestShow.innerText = personal_best_number;
 
 
-let PlayCount  = 0;
-
 let inputLength = 0;
 let wrongInput = 0;
 let lastCheckedIndex = 0;
@@ -560,6 +558,7 @@ function updatePersonalBest(){
     if (savedBest == 0){
         localStorage.setItem("personal_best_WPM", currentWPM);
         savedBest = currentWPM;
+        personal_best_number = currentWPM;
         personalBestShow.innerText = savedBest;
         Stars.classList.remove("disappearance");
 
@@ -583,6 +582,7 @@ function updatePersonalBest(){
 
     }else if(currentWPM > savedBest){
         savedBest = currentWPM;
+        personal_best_number = currentWPM;
         personalBestShow.innerText = savedBest;
 
         CelebrateLogo.classList.remove("disappearance");
