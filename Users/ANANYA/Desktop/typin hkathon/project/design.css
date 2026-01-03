@@ -482,6 +482,9 @@ font-family: 'Sora','Poppins','Quicksand';
     font-family: 'Sora', 'Poppins', 'Quicksand';
     font-weight: 600;
     border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #final-btn i{
     margin-left: 0.25rem;

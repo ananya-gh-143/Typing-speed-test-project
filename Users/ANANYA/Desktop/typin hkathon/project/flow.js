@@ -7,12 +7,13 @@ let starterPage = document.querySelector(".start-main-cont");
 let typeSelectOptions = document.querySelector("#type-options");
 let wpmShowBox = document.querySelector("#current-wpm");
 let accuracyShowBox = document.querySelector("#current-accuracy");
+let resetButton = document.querySelector(".resetButton");
 const typingInput = document.querySelector("#typingInput");
 
 let MainArea  = document.querySelector("#main-area-container");
 let FinalPage = document.querySelector(".successful-page");
 
-let GreenCheck = document.querySelector(".main-logo-cont");
+let GreenCheckLogo = document.querySelector(".main-logo-cont");
 let CelebrateLogo = document.querySelector("#Best-logo");
 
 let FinalMainText = document.querySelector("#main-header");
@@ -25,11 +26,16 @@ let FinalTotalCharShow = document.querySelector("#detail-show-char-total");
 let FinalWrongCharShow = document.querySelector("#detail-show-char-wrong");
 
 let FinalButton = document.querySelector("#final-btn");
+let FinalButtonText = document.querySelector("#final-btn-text")
 
 let Confetti = document.querySelector("#confetti");
 let Stars = document.querySelector(".star");
 
 
+
+
+let PlayCount  = 0;
+let WPMcount = 0;
 
 let inputLength = 0;
 let wrongInput = 0;
@@ -153,17 +159,19 @@ typeSelectOptions.addEventListener("change",()=>{
 })
 
 
-
-
-starterPage.addEventListener("click",()=>{
+function DefaultControls(){
     loadText("medium");
     let mediumradio = document.querySelector("#difficulty-medium");
     mediumradio.checked = true;
     let timedradio = document.querySelector("#mode-timed");
     timedradio.checked = true;
 
+   typingInput && typingInput.focus();
+}
+
+starterPage.addEventListener("click",()=>{
+    DefaultControls();   
     starterPage.classList.add("disappearance");
-    typingInput.focus();
 })
 
 
@@ -401,6 +409,7 @@ function stopTimer(){
         clearInterval(IntervalID);
         StoreSec = Seconds;
         TIME = false;
+        IntervalID = null;
         updateRadioOptions();
         updateModeOptions();
         updateTextType();
@@ -439,6 +448,7 @@ function stopTimer2(){
         clearInterval(IntervalID2);
         upStoreSec = upSeconds;
         TIME = false;
+        IntervalID2 = null;
         updateRadioOptions();
         updateModeOptions();
         updateTextType();
@@ -456,6 +466,7 @@ function wpmCalculator (){
         }
         let WPM = (inputLength / 5) / ((Seconds-StoreSec) / 60); 
         wpmShowBox.innerText = Math.round(WPM);
+        FinalWPMshow.innerText = Math.round(WPM);
 
     }else if(TimerType == upTimer){
         if (inputLength < 5 || upStoreSec < 1){
@@ -463,6 +474,7 @@ function wpmCalculator (){
         }
         let WPM = (inputLength / 5) / (upStoreSec / 60);
         wpmShowBox.innerText = Math.round(WPM);
+        FinalWPMshow.innerText = Math.round(WPM);
     }
 }
 
@@ -473,6 +485,7 @@ function accuracyCalculator(){
 
     let accuracyPercent = ((inputLength - wrongInput) / inputLength) * 100;
     accuracyShowBox.innerText = Math.round(accuracyPercent);
+    FinalAccuracyShow.innerText = Math.round(accuracyPercent);
 }
 
 function accuracyReset (){
@@ -483,14 +496,76 @@ function accuracyReset (){
     accuracyShowBox.innerText = 0;
 }
 
+function FinalPageCharacters(){
+    
+    let total_Char = inputLength;
+    let wrong_Char = wrongInput;
+
+    FinalTotalCharShow.innerText = total_Char;
+    FinalWrongCharShow.innerText = wrong_Char;
+}
+
 
 
 function FinalPageShow (){
+    FinalPageCharacters();
     MainArea.classList.add("disappearance");
     FinalPage.classList.remove("disappearance");
+
+    if(PlayCount == 0){
+        CelebrateLogo.classList.add("disappearance");
+        GreenCheckLogo.classList.remove("disappearance");
+        Confetti.classList.add("disappearance");
+
+        FinalMainText.innerText = "Baseline Established!";
+        FinalSubText.innerText = "You've set the bar. Now the real challenge begins- time to beat it.";
+        FinalButtonText.innerText = "Beat This Score ";
+        
+    }else if(PlayCount > 0){
+        CelebrateLogo.classList.add("disappearance");
+        Confetti.classList.add("disappearance");
+
+        FinalMainText.innerText = "Test Complete!";
+        FinalSubText.innerText = "Solid run. Keep pushing to beat your high score.";
+        FinalButtonText.innerText = "Go Again ";        
+    }
+    PlayCount++;
 }
 
 function FinalPageHide (){
     MainArea.classList.remove("disappearance");
     FinalPage.classList.add("disappearance");
 }
+
+function ResetGame(){
+
+    //STOP TIMERS
+    stopTimer();
+    stopTimer2();
+
+    //RESET COUNTERS
+    accuracyReset();
+
+    //RESET TIMER STATES
+    TimerType = backTimer;
+    upStoreSec = upSeconds;
+    StoreSec = Seconds;
+    timeDisplayer.innerText = MinSec(StoreSec);
+
+    //RESET UI 
+    wpmShowBox.innerText = 0;
+    accuracyShowBox.innerText = 0;
+
+    //RESET INPUT BOX
+    typingInput.disabled = false;
+    typingInput.value = "";
+    typingInput.focus();
+
+
+    FinalPageHide();
+    DefaultControls();
+    
+}
+
+FinalButton.addEventListener("click", ResetGame);
+resetButton.addEventListener("click", ResetGame);
