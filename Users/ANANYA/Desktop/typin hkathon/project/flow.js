@@ -13,22 +13,16 @@ const typingInput = document.querySelector("#typingInput");
 
 let MainArea  = document.querySelector("#main-area-container");
 let FinalPage = document.querySelector(".successful-page");
-
 let GreenCheckLogo = document.querySelector("#maingreen-logo-cont");
 let CelebrateLogo = document.querySelector("#Best-logo");
-
 let FinalMainText = document.querySelector("#main-header");
 let FinalSubText = document.querySelector("#belowtext");
-
 let FinalWPMshow = document.querySelector("#detail-show-wpm");
 let FinalAccuracyShow = document.querySelector("#detail-show-accuracy");
-
 let FinalTotalCharShow = document.querySelector("#detail-show-char-total");
 let FinalWrongCharShow = document.querySelector("#detail-show-char-wrong");
-
 let FinalButton = document.querySelector("#final-btn");
 let FinalButtonText = document.querySelector("#final-btn-text")
-
 let Confetti = document.querySelector("#confetti");
 let Stars = document.querySelector(".star");
 
@@ -351,7 +345,7 @@ typingInput.addEventListener("input",()=>{
   }else if(nextIndex == spans.length){
     typingInput.disabled = true;
     console.log("passage over!")
-    //........................................................................................................................................
+    
     FinalPageShow();
 
     if (TimerType == backTimer){
@@ -401,7 +395,7 @@ function backTimer (){
             updateTextType();
             updateTimeType();
             typingInput.disabled = true;
-            //......................................................................................................................................
+            
             FinalPageShow();
 
         }
