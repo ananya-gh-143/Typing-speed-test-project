@@ -12,6 +12,22 @@ const typingInput = document.querySelector("#typingInput");
 let MainArea  = document.querySelector("#main-area-container");
 let FinalPage = document.querySelector(".successful-page");
 
+let GreenCheck = document.querySelector(".main-logo-cont");
+let CelebrateLogo = document.querySelector("#Best-logo");
+
+let FinalMainText = document.querySelector("#main-header");
+let FinalSubText = document.querySelector("#belowtext");
+
+let FinalWPMshow = document.querySelector("#detail-show-wpm");
+let FinalAccuracyShow = document.querySelector("#detail-show-accuracy");
+
+let FinalTotalCharShow = document.querySelector("#detail-show-char-total");
+let FinalWrongCharShow = document.querySelector("#detail-show-char-wrong");
+
+let FinalButton = document.querySelector("#final-btn");
+
+let Confetti = document.querySelector("#confetti");
+let Stars = document.querySelector(".star");
 
 
 

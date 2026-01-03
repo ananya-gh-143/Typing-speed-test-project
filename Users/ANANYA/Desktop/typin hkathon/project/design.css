@@ -499,6 +499,26 @@ font-family: 'Sora','Poppins','Quicksand';
 }
 
 
+#star1{
+    height: 3rem;
+    width: 3rem;
+    background-image: url("images/pattern-star-1.svg");
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 56%;
+    left: 85%;
+    background-size: contain;
+}
 
-
-
+#star2{
+    height: 2rem;
+    width: 2rem;
+    background-image: url("images/pattern-star-2.svg");
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 25%;
+    left: 10%;
+    background-size: contain;
+}
