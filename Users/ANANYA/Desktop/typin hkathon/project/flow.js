@@ -344,7 +344,6 @@ typingInput.addEventListener("input",()=>{
     spans[nextIndex].classList.add("current");
   }else if(nextIndex == spans.length){
     typingInput.disabled = true;
-    console.log("passage over!")
     
     FinalPageShow();
 
