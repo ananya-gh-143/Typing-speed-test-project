@@ -1,5 +1,6 @@
 
 let textDisplay = document.querySelector(".textDisplay");
+let personalBestShow = document.querySelector("#personal-best-no");
 let timeDisplayer = document.querySelector("#current-timer");
 let timeSelectOptions = document.querySelector("#time-options");
 let starterBtn = document.querySelector("#start-typing-test");
@@ -13,7 +14,7 @@ const typingInput = document.querySelector("#typingInput");
 let MainArea  = document.querySelector("#main-area-container");
 let FinalPage = document.querySelector(".successful-page");
 
-let GreenCheckLogo = document.querySelector(".main-logo-cont");
+let GreenCheckLogo = document.querySelector("#maingreen-logo-cont");
 let CelebrateLogo = document.querySelector("#Best-logo");
 
 let FinalMainText = document.querySelector("#main-header");
@@ -34,8 +35,12 @@ let Stars = document.querySelector(".star");
 
 
 
+
+let personal_best_number = parseInt(localStorage.getItem("personal_best_WPM")) || 0;    //gets a key from localStorage called personal_best_WPM , if it doesn't exist then returns 0
+personalBestShow.innerText = personal_best_number;
+
+
 let PlayCount  = 0;
-let WPMcount = 0;
 
 let inputLength = 0;
 let wrongInput = 0;
@@ -512,24 +517,7 @@ function FinalPageShow (){
     MainArea.classList.add("disappearance");
     FinalPage.classList.remove("disappearance");
 
-    if(PlayCount == 0){
-        CelebrateLogo.classList.add("disappearance");
-        GreenCheckLogo.classList.remove("disappearance");
-        Confetti.classList.add("disappearance");
-
-        FinalMainText.innerText = "Baseline Established!";
-        FinalSubText.innerText = "You've set the bar. Now the real challenge begins- time to beat it.";
-        FinalButtonText.innerText = "Beat This Score ";
-        
-    }else if(PlayCount > 0){
-        CelebrateLogo.classList.add("disappearance");
-        Confetti.classList.add("disappearance");
-
-        FinalMainText.innerText = "Test Complete!";
-        FinalSubText.innerText = "Solid run. Keep pushing to beat your high score.";
-        FinalButtonText.innerText = "Go Again ";        
-    }
-    PlayCount++;
+    updatePersonalBest();
 }
 
 function FinalPageHide (){
@@ -569,3 +557,50 @@ function ResetGame(){
 
 FinalButton.addEventListener("click", ResetGame);
 resetButton.addEventListener("click", ResetGame);
+
+
+
+function updatePersonalBest(){
+    let currentWPM = parseInt(FinalWPMshow.innerText);
+    let savedBest = personal_best_number;
+
+    if (savedBest == 0){
+        localStorage.setItem("personal_best_WPM", currentWPM);
+        savedBest = currentWPM;
+        personalBestShow.innerText = savedBest;
+        Stars.classList.remove("disappearance");
+
+        CelebrateLogo.classList.add("disappearance");
+        GreenCheckLogo.classList.remove("disappearance");
+        Confetti.classList.add("disappearance");
+
+        FinalMainText.innerText = "Baseline Established!";
+        FinalSubText.innerText = "You've set the bar. Now the real challenge begins- time to beat it.";
+        FinalButtonText.innerText = "Beat This Score ";
+
+    }else if(currentWPM < savedBest){
+        CelebrateLogo.classList.add("disappearance");
+        Confetti.classList.add("disappearance");
+        GreenCheckLogo.classList.remove("disappearance");
+        Stars.classList.remove("disappearance");
+
+        FinalMainText.innerText = "Test Complete!";
+        FinalSubText.innerText = "Solid run. Keep pushing to beat your high score.";
+        FinalButtonText.innerText = "Go Again ";
+
+    }else if(currentWPM > savedBest){
+        savedBest = currentWPM;
+        personalBestShow.innerText = savedBest;
+
+        CelebrateLogo.classList.remove("disappearance");
+        Confetti.classList.remove("disappearance");
+        GreenCheckLogo.classList.add("disappearance");
+        Stars.classList.add("disappearance");
+
+        FinalMainText.innerText = "High Score Smashed!";
+        FinalSubText.innerText = "You're getting faster. That was incredible typing.";
+        FinalButtonText.innerText = "Beat this score ";
+    }
+}
+
+
